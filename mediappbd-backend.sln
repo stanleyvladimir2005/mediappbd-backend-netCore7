@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mediappbd-backend", "mediappbd-backend\mediappbd-backend.csproj", "{DD8CFA63-E70A-4C18-9A7E-6A515E49F086}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD8CFA63-E70A-4C18-9A7E-6A515E49F086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD8CFA63-E70A-4C18-9A7E-6A515E49F086}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD8CFA63-E70A-4C18-9A7E-6A515E49F086}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD8CFA63-E70A-4C18-9A7E-6A515E49F086}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {522ACA1B-1B66-4E93-BB98-E3D2EFB6AE1F}
+	EndGlobalSection
+EndGlobal
