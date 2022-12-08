@@ -60,7 +60,7 @@ namespace mediappbd_backend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MovieExists(id))              
+                if (!PacienteExists(id))              
                     return NotFound();              
                 else               
                    throw;              
@@ -83,7 +83,7 @@ namespace mediappbd_backend.Controllers
             return NoContent();
         }
 
-        private bool MovieExists(long id)
+        private bool PacienteExists(long id)
         {
             return (_connection.Paciente?.Any(e => e.Id == id)).GetValueOrDefault();
         }
