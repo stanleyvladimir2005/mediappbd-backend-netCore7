@@ -7,12 +7,11 @@ namespace mediappbd_backend.Data
     public class DatabaseConnection : DbContext
     {
         public DatabaseConnection(DbContextOptions<DatabaseConnection> options) : base(options)
-        {
-        }
+        { }
 
-        public DbSet<Paciente> Paciente => Set<Paciente>();
-        public DbSet<Medico> Medico => Set<Medico>();
-        public DbSet<Examen> Examen => Set<Examen>();
-        public DbSet<Especialidad> Especialidad => Set<Especialidad>();
+        public DbSet<Patient> patient => Set<Patient>();
+        public DbSet<Medic> medic => Set<Medic>();
+        public DbSet<Exam> exam => Set<Exam>();
+        public DbSet<Specialty> specialty => Set<Specialty>();
     }
 }

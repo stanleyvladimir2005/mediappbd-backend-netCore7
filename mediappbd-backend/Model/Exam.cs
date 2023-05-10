@@ -3,16 +3,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace mediappbd_backend.Model
 {
-    [Table("examen")]
-    public class Examen
+    [Table("exam")]
+    public class Exam
     {
         [Key, Required]
         public int Id { get; set; }
 
-        public String nombre { get; set; }
+        public String examName { get; set; }
 
-        public String descripcion { get; set; }
+        public String description { get; set; }
 
-        public Boolean estado { get; set; }
+        public Boolean status { get; set; }
     }
 }

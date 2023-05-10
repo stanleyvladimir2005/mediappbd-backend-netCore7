@@ -7,48 +7,48 @@ namespace mediappbd_backend.Controllers
 {
     [Route("v1/[controller]")]
     [ApiController]
-    public class PacienteController : ControllerBase
+    public class PatientController : ControllerBase
     {
         private DatabaseConnection _connection;
 
-        public PacienteController(DatabaseConnection connection)
+        public PatientController(DatabaseConnection connection)
         {
             _connection = connection;
         }
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Paciente>>> GetPacientes()
+        public async Task<ActionResult<IEnumerable<Patient>>> Getpatients()
         {
-            if (_connection.Paciente is null)         
+            if (_connection.patient is null)         
                 return NotFound();
             
-            return await _connection.Paciente.ToListAsync();
+            return await _connection.patient.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Paciente>> GetPaciente(int id)
+        public async Task<ActionResult<Patient>> Getpatient(int id)
         {
-            if (_connection.Paciente is null)            
+            if (_connection.patient is null)            
                 return NotFound();
             
-            var paciente = await _connection.Paciente.FindAsync(id);
-            if (paciente is null)        
+            var patient = await _connection.patient.FindAsync(id);
+            if (patient is null)        
                 return NotFound();
             
-            return paciente;
+            return patient;
         }
 
         [HttpPost]
-        public async Task<ActionResult<Paciente>> PostPaciente(Paciente pac)
+        public async Task<ActionResult<Patient>> Postpatient(Patient pac)
         {
-            _connection.Paciente.Add(pac);
+            _connection.patient.Add(pac);
             await _connection.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetPaciente), new { id = pac.Id }, pac);
+            return CreatedAtAction(nameof(Getpatient), new { id = pac.Id }, pac);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPaciente(int id, Paciente pac)
+        public async Task<IActionResult> Putpatient(int id, Patient pac)
         {
             if (id != pac.Id)           
                 return BadRequest();
@@ -60,7 +60,7 @@ namespace mediappbd_backend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PacienteExists(id))              
+                if (!patientExists(id))              
                     return NotFound();              
                 else               
                    throw;              
@@ -69,23 +69,23 @@ namespace mediappbd_backend.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePaciente(int id)
+        public async Task<IActionResult> Deletepatient(int id)
         {
-            if (_connection.Paciente is null)           
+            if (_connection.patient is null)           
                 return NotFound();
             
-            var paciente = await _connection.Paciente.FindAsync(id);
-            if (paciente is null)           
+            var patient = await _connection.patient.FindAsync(id);
+            if (patient is null)           
                 return NotFound();
             
-            _connection.Paciente.Remove(paciente);
+            _connection.patient.Remove(patient);
             await _connection.SaveChangesAsync();
             return NoContent();
         }
 
-        private bool PacienteExists(long id)
+        private bool patientExists(long id)
         {
-            return (_connection.Paciente?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_connection.patient?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

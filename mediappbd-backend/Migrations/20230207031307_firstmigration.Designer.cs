@@ -11,7 +11,7 @@ using mediappbd_backend.Data;
 namespace mediappbdbackend.Migrations
 {
     [DbContext(typeof(DatabaseConnection))]
-    [Migration("20221208052923_firstmigration")]
+    [Migration("20230207031307_firstmigration")]
     partial class firstmigration
     {
         /// <inheritdoc />
@@ -19,12 +19,12 @@ namespace mediappbdbackend.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0")
+                .HasAnnotation("ProductVersion", "7.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("mediappbd_backend.Model.Especialidad", b =>
+            modelBuilder.Entity("mediappbd_backend.Model.Exam", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,53 +32,29 @@ namespace mediappbdbackend.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("estado")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("nombre")
+                    b.Property<string>("description")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<string>("examName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("status")
+                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
-                    b.ToTable("especialidad");
+                    b.ToTable("exam");
                 });
 
-            modelBuilder.Entity("mediappbd_backend.Model.Examen", b =>
+            modelBuilder.Entity("mediappbd_backend.Model.Medic", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("descripcion")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<bool>("estado")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("nombre")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("examen");
-                });
-
-            modelBuilder.Entity("mediappbd_backend.Model.Medico", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("apellidos")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("dui")
                         .IsRequired()
@@ -88,10 +64,15 @@ namespace mediappbdbackend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<bool>("estado")
-                        .HasColumnType("boolean");
+                    b.Property<string>("firstName")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.Property<string>("nombres")
+                    b.Property<string>("lastName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("phone")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -99,16 +80,15 @@ namespace mediappbdbackend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("telefono")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<bool>("status")
+                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
-                    b.ToTable("medico");
+                    b.ToTable("medic");
                 });
 
-            modelBuilder.Entity("mediappbd_backend.Model.Paciente", b =>
+            modelBuilder.Entity("mediappbd_backend.Model.Patient", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -116,11 +96,7 @@ namespace mediappbdbackend.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("apellidos")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("direccion")
+                    b.Property<string>("address")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -132,20 +108,44 @@ namespace mediappbdbackend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<bool>("estado")
+                    b.Property<string>("firstName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("lastName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("phone")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("status")
                         .HasColumnType("boolean");
-
-                    b.Property<string>("nombres")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("telefono")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("paciente");
+                    b.ToTable("patient");
+                });
+
+            modelBuilder.Entity("mediappbd_backend.Model.Specialty", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("specialtyName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("status")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("specialty");
                 });
 #pragma warning restore 612, 618
         }

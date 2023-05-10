@@ -3,14 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace mediappbd_backend.Model
 {
-    [Table("especialidad")]
-    public class Especialidad
+    [Table("specialty")]
+    public class Specialty
     {
         [Key,Required]
         public int Id { get; set; }
 
-        public String nombre { get; set; }
+        public String specialtyName { get; set; }
 
-        public Boolean estado { get; set; }
+        public Boolean status { get; set; }
     }
 }

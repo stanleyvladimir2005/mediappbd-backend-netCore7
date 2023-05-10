@@ -8,48 +8,48 @@ namespace mediappbd_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ExamenController : ControllerBase
+    public class ExamController : ControllerBase
     {
         private DatabaseConnection _connection;
 
-        public ExamenController(DatabaseConnection connection)
+        public ExamController(DatabaseConnection connection)
         {
             _connection = connection;
         }
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Examen>>> GetExamens()
+        public async Task<ActionResult<IEnumerable<Exam>>> Getexams()
         {
-            if (_connection.Examen is null)
+            if (_connection.exam is null)
                 return NotFound();
 
-            return await _connection.Examen.ToListAsync();
+            return await _connection.exam.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Examen>> GetExamen(int id)
+        public async Task<ActionResult<Exam>> Getexam(int id)
         {
-            if (_connection.Examen is null)
+            if (_connection.exam is null)
                 return NotFound();
 
-            var examen = await _connection.Examen.FindAsync(id);
-            if (examen is null)
+            var exam = await _connection.exam.FindAsync(id);
+            if (exam is null)
                 return NotFound();
 
-            return examen;
+            return exam;
         }
 
         [HttpPost]
-        public async Task<ActionResult<Examen>> PostExamen(Examen exa)
+        public async Task<ActionResult<Exam>> Postexam(Exam exa)
         {
-            _connection.Examen.Add(exa);
+            _connection.exam.Add(exa);
             await _connection.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetExamen), new { id = exa.Id }, exa);
+            return CreatedAtAction(nameof(Getexam), new { id = exa.Id }, exa);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutExamen(int id, Examen exa)
+        public async Task<IActionResult> Putexam(int id, Exam exa)
         {
             if (id != exa.Id)
                 return BadRequest();
@@ -61,7 +61,7 @@ namespace mediappbd_backend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ExamenExists(id))
+                if (!examExists(id))
                     return NotFound();
                 else
                     throw;
@@ -70,23 +70,23 @@ namespace mediappbd_backend.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteExamen(int id)
+        public async Task<IActionResult> Deleteexam(int id)
         {
-            if (_connection.Examen is null)
+            if (_connection.exam is null)
                 return NotFound();
 
-            var Examen = await _connection.Examen.FindAsync(id);
-            if (Examen is null)
+            var exam = await _connection.exam.FindAsync(id);
+            if (exam is null)
                 return NotFound();
 
-            _connection.Examen.Remove(Examen);
+            _connection.exam.Remove(exam);
             await _connection.SaveChangesAsync();
             return NoContent();
         }
 
-        private bool ExamenExists(long id)
+        private bool examExists(long id)
         {
-            return (_connection.Examen?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_connection.exam?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

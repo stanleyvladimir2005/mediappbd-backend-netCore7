@@ -8,48 +8,48 @@ namespace mediappbd_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MedicoController : ControllerBase
+    public class MedicController : ControllerBase
     {
         private DatabaseConnection _connection;
 
-        public MedicoController(DatabaseConnection connection)
+        public MedicController(DatabaseConnection connection)
         {
             _connection = connection;
         }
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Medico>>> GetMedicos()
+        public async Task<ActionResult<IEnumerable<Medic>>> Getmedics()
         {
-            if (_connection.Medico is null)
+            if (_connection.medic is null)
                 return NotFound();
 
-            return await _connection.Medico.ToListAsync();
+            return await _connection.medic.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Medico>> GetMedico(int id)
+        public async Task<ActionResult<Medic>> Getmedic(int id)
         {
-            if (_connection.Medico is null)
+            if (_connection.medic is null)
                 return NotFound();
 
-            var medico = await _connection.Medico.FindAsync(id);
-            if (medico is null)
+            var medic = await _connection.medic.FindAsync(id);
+            if (medic is null)
                 return NotFound();
 
-            return medico;
+            return medic;
         }
 
         [HttpPost]
-        public async Task<ActionResult<Medico>> PostMedico(Medico med)
+        public async Task<ActionResult<Medic>> Postmedic(Medic med)
         {
-            _connection.Medico.Add(med);
+            _connection.medic.Add(med);
             await _connection.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetMedico), new { id = med.Id }, med);
+            return CreatedAtAction(nameof(Getmedic), new { id = med.Id }, med);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMedico(int id, Medico med)
+        public async Task<IActionResult> Putmedic(int id, Medic med)
         {
             if (id != med.Id)
                 return BadRequest();
@@ -61,7 +61,7 @@ namespace mediappbd_backend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MedicoExists(id))
+                if (!medicExists(id))
                     return NotFound();
                 else
                     throw;
@@ -70,23 +70,23 @@ namespace mediappbd_backend.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMedico(int id)
+        public async Task<IActionResult> Deletemedic(int id)
         {
-            if (_connection.Medico is null)
+            if (_connection.medic is null)
                 return NotFound();
 
-            var medico = await _connection.Medico.FindAsync(id);
-            if (medico is null)
+            var medic = await _connection.medic.FindAsync(id);
+            if (medic is null)
                 return NotFound();
 
-            _connection.Medico.Remove(medico);
+            _connection.medic.Remove(medic);
             await _connection.SaveChangesAsync();
             return NoContent();
         }
 
-        private bool MedicoExists(long id)
+        private bool medicExists(long id)
         {
-            return (_connection.Medico?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_connection.medic?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

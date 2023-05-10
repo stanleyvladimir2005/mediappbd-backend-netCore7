@@ -12,70 +12,70 @@ namespace mediappbdbackend.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "especialidad",
+                name: "exam",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    nombre = table.Column<string>(type: "text", nullable: false),
-                    estado = table.Column<bool>(type: "boolean", nullable: false)
+                    examName = table.Column<string>(type: "text", nullable: false),
+                    description = table.Column<string>(type: "text", nullable: false),
+                    status = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_especialidad", x => x.Id);
+                    table.PrimaryKey("PK_exam", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "examen",
+                name: "medic",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    nombre = table.Column<string>(type: "text", nullable: false),
-                    descripcion = table.Column<string>(type: "text", nullable: false),
-                    estado = table.Column<bool>(type: "boolean", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_examen", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "medico",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    nombres = table.Column<string>(type: "text", nullable: false),
-                    apellidos = table.Column<string>(type: "text", nullable: false),
+                    firstName = table.Column<string>(type: "text", nullable: false),
+                    lastName = table.Column<string>(type: "text", nullable: false),
                     dui = table.Column<string>(type: "text", nullable: false),
-                    telefono = table.Column<string>(type: "text", nullable: false),
+                    phone = table.Column<string>(type: "text", nullable: false),
                     email = table.Column<string>(type: "text", nullable: false),
                     photoUrl = table.Column<string>(type: "text", nullable: false),
-                    estado = table.Column<bool>(type: "boolean", nullable: false)
+                    status = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_medico", x => x.Id);
+                    table.PrimaryKey("PK_medic", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "paciente",
+                name: "patient",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    nombres = table.Column<string>(type: "text", nullable: false),
-                    apellidos = table.Column<string>(type: "text", nullable: false),
+                    firstName = table.Column<string>(type: "text", nullable: false),
+                    lastName = table.Column<string>(type: "text", nullable: false),
                     dui = table.Column<string>(type: "text", nullable: false),
-                    direccion = table.Column<string>(type: "text", nullable: false),
-                    telefono = table.Column<string>(type: "text", nullable: false),
+                    address = table.Column<string>(type: "text", nullable: false),
+                    phone = table.Column<string>(type: "text", nullable: false),
                     email = table.Column<string>(type: "text", nullable: false),
-                    estado = table.Column<bool>(type: "boolean", nullable: false)
+                    status = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_paciente", x => x.Id);
+                    table.PrimaryKey("PK_patient", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "specialty",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    specialtyName = table.Column<string>(type: "text", nullable: false),
+                    status = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_specialty", x => x.Id);
                 });
         }
 
@@ -83,16 +83,16 @@ namespace mediappbdbackend.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "especialidad");
+                name: "exam");
 
             migrationBuilder.DropTable(
-                name: "examen");
+                name: "medic");
 
             migrationBuilder.DropTable(
-                name: "medico");
+                name: "patient");
 
             migrationBuilder.DropTable(
-                name: "paciente");
+                name: "specialty");
         }
     }
 }
